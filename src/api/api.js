@@ -7,3 +7,8 @@ const apiClient = axios.create({
     },
   });
 
+  export default {
+    getItems(){
+        return apiClient.get('/posts')
+    }
+  }
