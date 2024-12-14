@@ -14,5 +14,9 @@ const apiClient = axios.create({
 
     getItem(id){
       return apiClient.get(`/posts/${id}`)
+    },
+
+    deleteItem(id){
+      return apiClient.delete(`/posts/${id}`)
     }
   }
