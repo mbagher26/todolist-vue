@@ -64,6 +64,41 @@ const savePostUpdated = (post_selected) => {
 </script>
 
 <style>
+form {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f4f4f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  margin: 20px auto;
+}
+
+form input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #4CAF50; /* سبز */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+form button:hover {
+  background-color: #45a049; /* رنگ سبز تیره‌تر هنگام هاور */
+}
+
 .post-item {
   border: 1px solid #ddd;
   padding: 10px;
