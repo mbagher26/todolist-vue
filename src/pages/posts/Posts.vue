@@ -3,7 +3,7 @@
     <h1>Posts List</h1>
 
     <div>
-      <input v-model="searchId" type="number" placeholder="Enter Post ID" />
+      <input class="input-search" v-model="searchId" type="number" placeholder="Enter Post ID" />
       <button @click="getPostById(searchId)">Search</button>
       <div v-if="post.id" class="post-item">
         <h2>{{ post.title }}</h2>
@@ -64,6 +64,25 @@ const savePostUpdated = (post_selected) => {
 </script>
 
 <style>
+button {
+  padding: 10px 15px;
+  background-color: #4CAF50; /* رنگ سبز */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.input-search {
+  width: 80%;
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
 form {
   margin-top: 20px;
   padding: 20px;
