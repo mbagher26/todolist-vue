@@ -1,9 +1,14 @@
 <template>
-    <div>
+  <div>
     <h1>Posts List</h1>
 
     <div>
-      <input class="input-search" v-model="searchId" type="number" placeholder="Enter Post ID" />
+      <input
+        class="input-search"
+        v-model="searchId"
+        type="number"
+        placeholder="Enter Post ID"
+      />
       <button @click="getPostById(searchId)">Search</button>
       <div v-if="post.id" class="post-item">
         <h2>{{ post.title }}</h2>
@@ -23,50 +28,50 @@
     </ul>
   </div>
   <form v-if="post_selected">
-    <input type="text" v-model="post_selected.title">
-    <input type="number" v-model="post_selected.userId">
-    <input type="text" v-model="post_selected.body">
-    <button type="button" @click="savePostUpdated(post_selected)">SAVE UPDATE</button>
+    <input type="text" v-model="post_selected.title" />
+    <input type="number" v-model="post_selected.userId" />
+    <input type="text" v-model="post_selected.body" />
+    <button type="button" @click="savePostUpdated(post_selected)">
+      SAVE UPDATE
+    </button>
   </form>
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import { useStore } from 'vuex';
-import { ref } from 'vue';
-
+import { computed } from "vue";
+import { useStore } from "vuex";
+import { ref } from "vue";
 
 const store = useStore();
 const posts = computed(() => store.state.posts);
 const post = computed(() => store.state.post);
 const post_selected = computed(() => store.state.post_selected);
 
-const searchId = ref('')
+const searchId = ref("");
 
-
-store.dispatch("fetchPosts")
+store.dispatch("fetchPosts");
 
 const getPostById = (searchId) => {
-  store.dispatch("fetchPostById", searchId)
-}
+  store.dispatch("fetchPostById", searchId);
+};
 
 const deletePost = (id) => {
-  store.dispatch("delete", id)
-}
+  store.dispatch("delete", id);
+};
 
 const updatePost = (id) => {
-  store.dispatch("update", id)
-}
+  store.dispatch("update", id);
+};
 
 const savePostUpdated = (post_selected) => {
-  store.dispatch("saveUpdated" , post_selected)
-}
+  store.dispatch("saveUpdated", post_selected);
+};
 </script>
 
 <style>
 button {
   padding: 10px 15px;
-  background-color: #4CAF50; /* رنگ سبز */
+  background-color: #4caf50; /* رنگ سبز */
   color: white;
   border: none;
   border-radius: 4px;
@@ -105,7 +110,7 @@ form input {
 form button {
   width: 100%;
   padding: 12px;
-  background-color: #4CAF50; /* سبز */
+  background-color: #4caf50; /* سبز */
   color: white;
   border: none;
   border-radius: 4px;
@@ -163,7 +168,7 @@ form button:hover {
 }
 
 .post-item .update-btn {
-  background-color: #008CBA; /* آبی */
+  background-color: #008cba; /* آبی */
   color: white;
 }
 
