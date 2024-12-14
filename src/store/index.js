@@ -28,7 +28,12 @@ const store = createStore({
       commit('SET_POSTS', response.data)
     },
 
-    async fetchPostById({ commit }, id) {
+    async fetchPostById({ commit, state }, id) {
+      const existingPost = state.posts.find(post => post.id === id)
+      if (!existingPost) {
+        console.error(`Post with ID ${id} has been deleted.`);
+        return;
+      }
       try {
         const response = await api.getItem(id);
         commit('SET_POST', response.data);
