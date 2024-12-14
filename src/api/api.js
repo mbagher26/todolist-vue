@@ -18,5 +18,9 @@ const apiClient = axios.create({
 
     deleteItem(id){
       return apiClient.delete(`/posts/${id}`)
+    },
+
+    updateItem(id){
+      return apiClient.put(`/posts/${id}`)
     }
   }
