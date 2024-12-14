@@ -10,5 +10,9 @@ const apiClient = axios.create({
   export default {
     getItems(){
         return apiClient.get('/posts')
+    },
+
+    getItem(id){
+      return apiClient.get(`/posts/${id}`)
     }
   }
