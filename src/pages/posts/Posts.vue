@@ -1,6 +1,17 @@
 <template>
     <div>
     <h1>Posts List</h1>
+
+    <div>
+      <input v-model="searchId" type="number" placeholder="Enter Post ID" />
+      <button @click="getPostById(searchId)">Search</button>
+      <div v-if="post" class="post-item">
+        <h2>{{ post.title }}</h2>
+        <p><strong>User ID:</strong> {{ post.userId }}</p>
+        <p>{{ post.body }}</p>
+      </div>
+    </div>
+
     <ul>
       <li v-for="post in posts" :key="post.id" class="post-item">
         <h2>{{ post.title }}</h2>
@@ -14,11 +25,20 @@
 <script setup>
 import { computed } from 'vue';
 import { useStore } from 'vuex';
+import { ref } from 'vue';
 
 
 const store = useStore();
-const posts = computed(() => store.state.posts)
+const posts = computed(() => store.state.posts);
+const post = computed(() => store.state.post);
+const searchId = ref('')
+
+
 store.dispatch("fetchPosts")
+
+const getPostById = (searchId) => {
+  store.dispatch("fetchPostById", searchId)
+}
 
 </script>
 
