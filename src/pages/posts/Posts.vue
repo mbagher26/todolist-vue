@@ -68,4 +68,18 @@ const deletePost = (id) => {
   line-height: 1.5;
   color: #555;
 }
+
+.delete-btn {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.delete-btn:hover {
+  background-color: #ff0000;
+}
 </style>
