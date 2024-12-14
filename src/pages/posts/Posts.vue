@@ -18,10 +18,16 @@
         <p><strong>User ID:</strong> {{ post.userId }}</p>
         <p>{{ post.body }}</p>
         <button class="delete-btn" @click="deletePost(post.id)">DELETE</button>
-
+        <button class="update-btn" @click="updatePost(post.id)">UPDATE</button>
       </li>
     </ul>
   </div>
+  <form v-if="post_selected">
+    <input type="text" v-model="post_selected.title">
+    <input type="number" v-model="post_selected.userId">
+    <input type="text" v-model="post_selected.body">
+    <button type="button" @click="savePostUpdated(post_selected)">SAVE UPDATE</button>
+  </form>
 </template>
 
 <script setup>
@@ -33,6 +39,8 @@ import { ref } from 'vue';
 const store = useStore();
 const posts = computed(() => store.state.posts);
 const post = computed(() => store.state.post);
+const post_selected = computed(() => store.state.post_selected);
+
 const searchId = ref('')
 
 
@@ -46,6 +54,13 @@ const deletePost = (id) => {
   store.dispatch("delete", id)
 }
 
+const updatePost = (id) => {
+  store.dispatch("update", id)
+}
+
+const savePostUpdated = (post_selected) => {
+  store.dispatch("saveUpdated" , post_selected)
+}
 </script>
 
 <style>
