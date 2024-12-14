@@ -119,6 +119,16 @@ form button:hover {
   color: #555;
 }
 
+.post-item button {
+  padding: 10px 15px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
 .delete-btn {
   background-color: #ff4d4d;
   color: white;
@@ -131,5 +141,14 @@ form button:hover {
 
 .delete-btn:hover {
   background-color: #ff0000;
+}
+
+.post-item .update-btn {
+  background-color: #008CBA; /* آبی */
+  color: white;
+}
+
+.post-item .update-btn:hover {
+  background-color: #007bb5;
 }
 </style>
