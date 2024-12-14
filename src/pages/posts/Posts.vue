@@ -17,6 +17,8 @@
         <h2>{{ post.title }}</h2>
         <p><strong>User ID:</strong> {{ post.userId }}</p>
         <p>{{ post.body }}</p>
+        <button class="delete-btn" @click="deletePost(post.id)">DELETE</button>
+
       </li>
     </ul>
   </div>
@@ -38,6 +40,10 @@ store.dispatch("fetchPosts")
 
 const getPostById = (searchId) => {
   store.dispatch("fetchPostById", searchId)
+}
+
+const deletePost = (id) => {
+  store.dispatch("delete", id)
 }
 
 </script>
