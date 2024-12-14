@@ -5,7 +5,8 @@ import api from '../api/api';
 const store = createStore({
   state: {
     posts: [],
-    post: {}
+    post: {},
+    post_selected: null
   },
 
   mutations: {
@@ -19,6 +20,15 @@ const store = createStore({
 
     REMOVE_POST(state, id) {
       state.posts = state.posts.filter(post => post.id !== id)
+    },
+
+    SELECTED_POST(state, selected_for_update) {
+      state.post_selected = selected_for_update
+    },
+
+    UPDATE_POST(state ,post_selected){
+      const Index = state.posts.findIndex(post => post.id ===post_selected.id)
+      state.post[Index] = {...post_selected}
     }
   },
 
@@ -50,6 +60,16 @@ const store = createStore({
       } catch (erroe) {
         console.error('Delete failed', erroe);
       }
+    },
+
+    async update({commit , state} , id){
+      const selected_for_update = state.posts.find(post => post.id === id)
+      commit("SELECTED_POST" , selected_for_update)
+    },
+
+    async saveUpdated({commit , state} , post_selected){
+      commit("UPDATE_POST" , post_selected)
+      state.post_selected = null
     }
   },
 
