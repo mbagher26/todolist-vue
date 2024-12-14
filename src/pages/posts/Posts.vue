@@ -5,7 +5,7 @@
     <div>
       <input v-model="searchId" type="number" placeholder="Enter Post ID" />
       <button @click="getPostById(searchId)">Search</button>
-      <div v-if="post" class="post-item">
+      <div v-if="post.id" class="post-item">
         <h2>{{ post.title }}</h2>
         <p><strong>User ID:</strong> {{ post.userId }}</p>
         <p>{{ post.body }}</p>
