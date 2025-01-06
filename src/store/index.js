@@ -29,6 +29,10 @@ const store = createStore({
     UPDATE_POST(state ,post_selected){
       const Index = state.posts.findIndex(post => post.id ===post_selected.id)
       state.post[Index] = {...post_selected}
+    },
+
+    ADD_POST(state , data){
+      state.posts.push(data)
     }
   },
 
@@ -70,6 +74,18 @@ const store = createStore({
     async saveUpdated({commit , state} , post_selected){
       commit("UPDATE_POST" , post_selected)
       state.post_selected = null
+    },
+
+    async addItem({commit} , post){
+      console.log(post);
+      
+      try{
+        const response = await api.createItem(post)
+        commit("ADD_POST", post)
+      }catch(erroe){
+        console.error("addItem failed");
+        
+      }
     }
   },
 
