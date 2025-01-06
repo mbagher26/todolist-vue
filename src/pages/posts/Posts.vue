@@ -2,6 +2,18 @@
   <div>
     <h1>Posts List</h1>
 
+    <ul>
+      <li v-for="post in posts" :key="post.id" class="post-item">
+        <h2>{{ post.title }}</h2>
+        <p><strong>User ID:</strong> {{ post.userId }}</p>
+        <p>{{ post.body }}</p>
+        <button class="delete-btn" @click="deletePost(post.id)">DELETE</button>
+        <button class="update-btn" @click="updatePost(post.id)">UPDATE</button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="rite-section">
     <div>
       <input
         class="input-search"
@@ -17,24 +29,28 @@
       </div>
     </div>
 
-    <ul>
-      <li v-for="post in posts" :key="post.id" class="post-item">
-        <h2>{{ post.title }}</h2>
-        <p><strong>User ID:</strong> {{ post.userId }}</p>
-        <p>{{ post.body }}</p>
-        <button class="delete-btn" @click="deletePost(post.id)">DELETE</button>
-        <button class="update-btn" @click="updatePost(post.id)">UPDATE</button>
-      </li>
-    </ul>
+    <form v-on:submit.prevent="submitForm">
+      <h1>title:</h1>
+      <input type="text" v-model="itemTitle" />
+      <h1>userId:</h1>
+      <input type="number" v-model="itemUserId" />
+      <h1>body:</h1>
+      <input type="text" v-model="itemBody" />
+      <button type="submit">CREATE</button>
+    </form>
+
+    <form v-if="post_selected">
+      <h1>title:</h1>
+      <input type="text" v-model="post_selected.title" />
+      <h1>userId:</h1>
+      <input type="number" v-model="post_selected.userId" />
+      <h1>body:</h1>
+      <input type="text" v-model="post_selected.body" />
+      <button type="button" @click="savePostUpdated(post_selected)">
+        SAVE UPDATE
+      </button>
+    </form>
   </div>
-  <form v-if="post_selected">
-    <input type="text" v-model="post_selected.title" />
-    <input type="number" v-model="post_selected.userId" />
-    <input type="text" v-model="post_selected.body" />
-    <button type="button" @click="savePostUpdated(post_selected)">
-      SAVE UPDATE
-    </button>
-  </form>
 </template>
 
 <script setup>
@@ -48,6 +64,9 @@ const post = computed(() => store.state.post);
 const post_selected = computed(() => store.state.post_selected);
 
 const searchId = ref("");
+const itemTitle = ref("");
+const itemUserId = ref("");
+const itemBody = ref("");
 
 store.dispatch("fetchPosts");
 
@@ -66,9 +85,29 @@ const updatePost = (id) => {
 const savePostUpdated = (post_selected) => {
   store.dispatch("saveUpdated", post_selected);
 };
+
+const submitForm = () => {
+  if (itemTitle.value && itemUserId.value && itemBody.value) {
+    store.dispatch("addItem", {
+      id: posts.value.length + 1,
+      title: itemTitle.value,
+      userId: itemUserId.value,
+      body: itemBody.value,
+    });
+  } else {
+    console.log("submitForm failed!!");
+  }
+};
 </script>
 
 <style>
+.rite-section {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 50px;
+}
+
 button {
   padding: 10px 15px;
   background-color: #4caf50; /* رنگ سبز */
@@ -88,14 +127,16 @@ button {
   border-radius: 4px;
   font-size: 16px;
 }
+
 form {
   margin-top: 20px;
   padding: 20px;
   background-color: #f4f4f9;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  width: 300px;
+  width: 500px;
   margin: 20px auto;
+  height: 400px;
 }
 
 form input {
