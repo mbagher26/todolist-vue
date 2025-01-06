@@ -22,5 +22,9 @@ const apiClient = axios.create({
 
     updateItem(id){
       return apiClient.put(`/posts/${id}`)
+    },
+
+    createItem(id , post){
+      return apiClient.post('/posts' , post)
     }
   }
