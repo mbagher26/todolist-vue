@@ -94,6 +94,12 @@ const submitForm = () => {
       userId: itemUserId.value,
       body: itemBody.value,
     });
+
+    // rest form fields
+    itemTitle.value = null,
+    itemUserId.value = null,
+    itemBody.value = null
+
   } else {
     console.log("submitForm failed!!");
   }
